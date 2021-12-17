@@ -5,6 +5,7 @@
     <string name="catalog">Catalog</string>
     <string name="basket">Basket</string>
     <string name="about_company">About Company</string>
+    <string name="about_TechnoBear">About TechnoBear</string>
     <string name="faq">FAQ</string>
     <string name="swipe_hint_image">Swipe from left to right to open menu</string>
 </resources>
