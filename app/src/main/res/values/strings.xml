@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">TechnoBearProject</string>
+    <string name="app_name">TechnoBear</string>
+    <string name="menu_name">TechnoBear Menu</string>
+    <string name="account">Account</string>
+    <string name="catalog">Catalog</string>
+    <string name="basket">Basket</string>
+    <string name="about_company">About Company</string>
+    <string name="faq">FAQ</string>
 </resources>

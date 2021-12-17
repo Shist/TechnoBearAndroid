@@ -2,7 +2,10 @@ package app.technobearproject.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
+val LightPrimary = Color(0xFFB39DDB)
+val LightBackground = Color(0xFFE6CEFF)
+val LightPrimaryVariant = Color(0xFF836FA9)
+
+val DarkPrimary = Color(0xFF512DA8)
+val DarkBackground = Color(0xFF8559DA)
+val DarkPrimaryVariant = Color(0xFF140078)
