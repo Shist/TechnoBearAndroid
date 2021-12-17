@@ -67,8 +67,8 @@ fun MakeScaffold() {
         drawerContent = {
             MenuContent()
         }
-    ) { innerPadding ->
-
+    ) {
+        InitialInformation()
     }
 }
 
@@ -165,5 +165,37 @@ fun MenuContent() {
 fun MenuContentPreview() {
     TechnoBearProjectTheme {
         MenuContent()
+    }
+}
+
+@Composable
+fun InitialInformation() {
+    Column(modifier = Modifier
+        .padding(all = 8.dp)
+        .fillMaxSize(),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(text = "Welcome to TechnoBear shop!",
+            modifier = Modifier.padding(all = 8.dp),
+            fontSize = 48.sp)
+        Text(text = "Let's start shopping by opening application menu.",
+            modifier = Modifier.padding(all = 8.dp),
+            fontSize = 24.sp)
+        Text(text = "Just swipe from left to right to open the menu or click the menu button in the upper left corner.",
+            modifier = Modifier.padding(all = 8.dp),
+            fontSize = 24.sp)
+    }
+}
+
+@Composable
+@Preview(name = "LightInitialInformationPreview")
+@Preview(
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true,
+    name = "DarkInitialInformationPreview"
+)
+fun InitialInformationPreview() {
+    TechnoBearProjectTheme {
+        InitialInformation()
     }
 }
