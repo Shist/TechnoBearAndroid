@@ -9,4 +9,11 @@
     <string name="faq">FAQ</string>
     <string name="contact_us">Contact Us</string>
     <string name="swipe_hint_image">Swipe from left to right to open menu</string>
+    <string name="send_feedback">Send Feedback</string>
+    <string name="no_items_found">No products were found for the entered query…</string>
+    <string name="back_to_catalog">Back to catalog</string>
+    <string name="amount">Amount</string>
+    <string name="price">Price</string>
+    <string name="add_to_basket">Add to basket</string>
+    <string name="description">Description</string>
 </resources>

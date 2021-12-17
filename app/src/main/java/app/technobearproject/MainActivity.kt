@@ -46,6 +46,8 @@ fun MakeScaffold() {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     val menuPage = remember { mutableStateOf(MenuPage.START_PAGE) }
+    val isItemSelected = remember { mutableStateOf(false) }
+    val selectedItem = remember { mutableStateOf(ProductItem()) }
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
@@ -87,7 +89,11 @@ fun MakeScaffold() {
                 Text("Here will be account")
             }
             MenuPage.CATALOG -> {
-                Text("Here will be catalog")
+                if (isItemSelected.value) {
+                    ItemDetails(isItemSelected, selectedItem)
+                } else {
+                    Catalog(isItemSelected, selectedItem)
+                }
             }
             MenuPage.BASKET -> {
                 Text("Here will be basket")
@@ -99,7 +105,7 @@ fun MakeScaffold() {
                 FAQ(FAQ.qList)
             }
             MenuPage.CONTACT_US -> {
-                Text("Here will be contact us")
+                ContactUs()
             }
         }
     }
