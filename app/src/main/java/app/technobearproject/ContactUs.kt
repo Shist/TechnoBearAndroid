@@ -1,18 +1,14 @@
 package app.technobearproject
 
 import android.content.res.Configuration
-import android.widget.Toast
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,9 +18,11 @@ import app.technobearproject.ui.theme.TechnoBearProjectTheme
 
 @Composable
 fun ContactUs() {
-    val context = LocalContext.current
     var mail by rememberSaveable { mutableStateOf("") }
     var feedback by rememberSaveable { mutableStateOf("") }
+    var alertDialogNeeded by remember { mutableStateOf(false) }
+    var alertDialogTitle by remember { mutableStateOf("Error") }
+    var alertDialogMessage by remember { mutableStateOf("Something get wrong...") }
     Column {
         Text(text = stringResource(R.string.contact_us),
             modifier = Modifier
@@ -55,28 +53,20 @@ fun ContactUs() {
             maxLines = 16
         )
         Button(onClick = {
+            alertDialogNeeded = true
             if (mail.isNotEmpty() and mail.contains('@')) {
                 if (feedback.isNotEmpty()) {
-                    Toast.makeText(
-                        context,
-                        "Your feedback has been sent to $mail, we will contact you soon.",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    alertDialogTitle = "Success"
+                    alertDialogMessage = "Your feedback has been sent to $mail, we will contact you soon."
                     mail = ""
                     feedback = ""
                 } else {
-                    Toast.makeText(
-                        context,
-                        "Your feedback is empty. Enter some information, please...",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    alertDialogTitle = "Error"
+                    alertDialogMessage = "Your feedback is empty. Enter some information, please..."
                 }
             } else {
-                Toast.makeText(
-                    context,
-                    "Entered mail is empty or incorrect. Please, try to enter correct mail...",
-                    Toast.LENGTH_LONG
-                ).show()
+                alertDialogTitle = "Error"
+                alertDialogMessage = "Entered mail is empty or incorrect. Please, try to enter correct mail..."
             }
         }, modifier = Modifier
             .padding(all = 8.dp)
@@ -89,6 +79,28 @@ fun ContactUs() {
                 fontSize = 24.sp,
                 textAlign = TextAlign.Center)
         }
+    }
+    if (alertDialogNeeded) {
+        AlertDialog(
+            onDismissRequest = {
+                alertDialogNeeded = false
+            },
+            title = {
+                Text(alertDialogTitle)
+            },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        alertDialogNeeded = false
+                    }
+                ) {
+                    Text("Confirm")
+                }
+            },
+            text = {
+                Text(alertDialogMessage)
+            },
+        )
     }
 }
 

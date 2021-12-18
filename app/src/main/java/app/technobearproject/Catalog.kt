@@ -15,6 +15,8 @@ import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -147,8 +149,9 @@ fun ItemCardPreview() {
 fun ItemDetails(isItemSelected: MutableState<Boolean>,
                 selectedItem: MutableState<ProductItem>) {
     val oneItemPrice = selectedItem.value.price.substring(1).toFloat()
-    val itemsAmount = selectedItem.value.amount.value.toInt()
+    val itemsAmount = selectedItem.value.selectedAmount.value.toInt()
     val wholeItemsPrice = "\$${(oneItemPrice * itemsAmount)}"
+    var alertDialogNeeded by remember { mutableStateOf(false) }
     LazyColumn {
         item {
             Row(modifier = Modifier.clickable {
@@ -189,12 +192,12 @@ fun ItemDetails(isItemSelected: MutableState<Boolean>,
                             fontSize = 24.sp
                         )
                         TextField(
-                            value = selectedItem.value.amount.value,
+                            value = selectedItem.value.selectedAmount.value,
                             modifier = Modifier
                                 .padding(all = 2.dp)
                                 .fillParentMaxWidth(0.15f),
                             onValueChange = {
-                                selectedItem.value.amount.value = it
+                                selectedItem.value.selectedAmount.value = it
                             },
                             label = { stringResource(id = R.string.amount) },
                             singleLine = true,
@@ -204,19 +207,21 @@ fun ItemDetails(isItemSelected: MutableState<Boolean>,
                             Icon(imageVector = Icons.Default.KeyboardArrowUp,
                                 contentDescription = "more products",
                                 modifier = Modifier
-                                    .padding(all = 2.dp).clickable {
-                                        var temp = selectedItem.value.amount.value.toInt()
+                                    .padding(all = 2.dp)
+                                    .clickable {
+                                        var temp = selectedItem.value.selectedAmount.value.toInt()
                                         temp += 1
-                                        selectedItem.value.amount.value = temp.toString()
+                                        selectedItem.value.selectedAmount.value = temp.toString()
                                     })
                             Icon(imageVector = Icons.Default.KeyboardArrowDown,
                                 contentDescription = "less products",
                                 modifier = Modifier
-                                    .padding(all = 2.dp).clickable {
-                                        var temp = selectedItem.value.amount.value.toInt()
+                                    .padding(all = 2.dp)
+                                    .clickable {
+                                        var temp = selectedItem.value.selectedAmount.value.toInt()
                                         temp -= 1
                                         if (temp < 0) temp = 0
-                                        selectedItem.value.amount.value = temp.toString()
+                                        selectedItem.value.selectedAmount.value = temp.toString()
                                     })
                         }
                     }
@@ -236,8 +241,15 @@ fun ItemDetails(isItemSelected: MutableState<Boolean>,
                         )
                     }
                     Button(onClick = {
-
-                    }, modifier = Modifier
+                        if (itemsAmount > 0) {
+                            val basketItemsBefore = selectedItem.value.basketAmount.value.toInt()
+                            val basketItemsAfter = basketItemsBefore + itemsAmount
+                            selectedItem.value.basketAmount.value = basketItemsAfter.toString()
+                            alertDialogNeeded = true
+                        }
+                    },
+                        enabled = itemsAmount > 0,
+                        modifier = Modifier
                         .padding(all = 8.dp)
                         .fillMaxWidth()
                     ) {
@@ -267,6 +279,32 @@ fun ItemDetails(isItemSelected: MutableState<Boolean>,
                 fontSize = 18.sp
             )
         }
+    }
+    if (alertDialogNeeded) {
+        AlertDialog(
+            onDismissRequest = {
+                alertDialogNeeded = false
+            },
+            title = {
+                Text("Success")
+            },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        alertDialogNeeded = false
+                    }
+                ) {
+                    Text("Confirm")
+                }
+            },
+            text = {
+                Text("Product added to basket successfully:\n" +
+                        "Name: ${selectedItem.value.name}\n" +
+                        "Price per one: ${selectedItem.value.price}\n" +
+                        "Amount: ${selectedItem.value.selectedAmount.value}\n" +
+                        "Total price: $wholeItemsPrice")
+            },
+        )
     }
 }
 

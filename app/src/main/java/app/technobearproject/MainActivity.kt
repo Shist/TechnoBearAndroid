@@ -48,6 +48,7 @@ fun MakeScaffold() {
     val menuPage = remember { mutableStateOf(MenuPage.START_PAGE) }
     val isItemSelected = remember { mutableStateOf(false) }
     val selectedItem = remember { mutableStateOf(ProductItem()) }
+    val basketState = remember { mutableStateOf(BasketState.BASKET) }
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
@@ -96,7 +97,17 @@ fun MakeScaffold() {
                 }
             }
             MenuPage.BASKET -> {
-                Text("Here will be basket")
+                when (basketState.value) {
+                    BasketState.BASKET -> {
+                        Basket(basketState)
+                    }
+                    BasketState.CHECKOUT_ORDER -> {
+                        CheckoutOrder(basketState)
+                    }
+                    BasketState.DELIVERY_DETAILS -> {
+                        DeliveryDetails(basketState)
+                    }
+                }
             }
             MenuPage.ABOUT_COMPANY -> {
                 AboutCompany()

@@ -14,7 +14,8 @@ class ProductItem(val name: String = "",
                   val image: Int = 0,
                   val description: String = "",
                   val type: ProductType = ProductType.NONE,
-                  var amount: MutableState<String> = mutableStateOf("0"))
+                  var selectedAmount: MutableState<String> = mutableStateOf("0"),
+                  var basketAmount: MutableState<String> = mutableStateOf("0"))
 
 val itemsWholeList = listOf(
     ProductItem("Smartphone SAMSUNG Galaxy A22 4GB / 128GB (white)",
@@ -31,6 +32,7 @@ val itemsWholeList = listOf(
                 "Product Range: Galaxy A22 (Samsung)\n" +
                 "Certification: PCT / STB / EAC",
         ProductType.PHONE,
+        mutableStateOf("0"),
         mutableStateOf("0")),
     ProductItem("Samsung TV QE55Q67AAUXRU",
         "\$2484.00",
@@ -44,6 +46,7 @@ val itemsWholeList = listOf(
                 "HDMI connector: 3\n" +
                 "USB: 2 ",
         ProductType.TV,
+        mutableStateOf("0"),
         mutableStateOf("0")),
     ProductItem("Smartphone SAMSUNG Galaxy A22 4GB / 128GB (white)",
         "\$599.99",
@@ -59,6 +62,7 @@ val itemsWholeList = listOf(
                 "Product Range: Galaxy A22 (Samsung)\n" +
                 "Certification: PCT / STB / EAC",
         ProductType.PHONE,
+        mutableStateOf("0"),
         mutableStateOf("0")),
     ProductItem("Samsung TV QE55Q67AAUXRU",
         "\$2484.00",
@@ -72,6 +76,7 @@ val itemsWholeList = listOf(
                 "HDMI connector: 3\n" +
                 "USB: 2 ",
         ProductType.TV,
+        mutableStateOf("0"),
         mutableStateOf("0")),
     ProductItem("Smartphone SAMSUNG Galaxy A22 4GB / 128GB (white)",
         "\$599.99",
@@ -87,6 +92,7 @@ val itemsWholeList = listOf(
                 "Product Range: Galaxy A22 (Samsung)\n" +
                 "Certification: PCT / STB / EAC",
         ProductType.PHONE,
+        mutableStateOf("0"),
         mutableStateOf("0")),
     ProductItem("Samsung TV QE55Q67AAUXRU",
         "\$2484.00",
