@@ -13,6 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -87,7 +88,7 @@ fun MakeScaffold() {
                 InitialInformation()
             }
             MenuPage.ACCOUNT -> {
-                Text("Here will be account")
+                Account()
             }
             MenuPage.CATALOG -> {
                 if (isItemSelected.value) {
@@ -105,7 +106,7 @@ fun MakeScaffold() {
                         CheckoutOrder(basketState)
                     }
                     BasketState.DELIVERY_DETAILS -> {
-                        DeliveryDetails(basketState)
+                        DeliveryDetails(basketState, menuPage, isItemSelected)
                     }
                 }
             }

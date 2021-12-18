@@ -24,4 +24,11 @@
     <string name="empty_phone_number">You entered empty phone number. Please, enter some…</string>
     <string name="delivery_details">Delivery Details</string>
     <string name="back_to_checkout_order">Back to checkout order</string>
+    <string name="pick_up_point">Pick-Up Point</string>
+    <string name="home_delivery">Home Delivery</string>
+    <string name="choose_delivery">Choose Method of Receiving:</string>
+    <string name="personal_area">Personal Area</string>
+    <string name="choose_pick_up">Choose some pick-up point from the dropdown list:</string>
+    <string name="enter_address">Enter your address and other contact information:</string>
+    <string name="complete_order">Complete Order</string>
 </resources>

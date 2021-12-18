@@ -397,8 +397,241 @@ fun CheckoutOrderPreview() {
 }
 
 @Composable
-fun DeliveryDetails(basketState: MutableState<BasketState>) {
-
+fun DeliveryDetails(basketState: MutableState<BasketState>,
+                    menuState: MutableState<MenuPage>,
+                    isItemSelected: MutableState<Boolean>) {
+    val radioOptions = listOf(stringResource(id = R.string.pick_up_point),
+        stringResource(id = R.string.home_delivery))
+    val selectedButton = remember { mutableStateOf(radioOptions[0]) }
+    var alertDialogNeeded by remember { mutableStateOf(false) }
+    var alertDialogTitle by remember { mutableStateOf("Error") }
+    var alertDialogMessage by remember { mutableStateOf("Something get wrong...") }
+    val deliveryOptions = listOf("Dzerzhinskaga, 122", "Slobodskaya, 177", "Independence, 4")
+    var expanded by remember { mutableStateOf(false) }
+    var selectedIndex by remember { mutableStateOf(0) }
+    var addressInfo by remember { mutableStateOf("") }
+    Column {
+        LazyColumn(modifier = Modifier.weight(1f)) {
+            item {
+                Row(modifier = Modifier.clickable {
+                    basketState.value = BasketState.CHECKOUT_ORDER
+                }) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "back to checkout order",
+                        modifier = Modifier
+                            .padding(all = 8.dp)
+                    )
+                    Text(
+                        text = stringResource(id = R.string.back_to_checkout_order),
+                        modifier = Modifier
+                            .padding(all = 8.dp)
+                    )
+                }
+            }
+            item {
+                Text(
+                    text = stringResource(R.string.delivery_details),
+                    modifier = Modifier
+                        .padding(all = 8.dp)
+                        .fillMaxWidth(),
+                    fontSize = 36.sp,
+                    textAlign = TextAlign.Center
+                )
+            }
+            item {
+                Text(
+                    text = stringResource(R.string.choose_delivery),
+                    modifier = Modifier
+                        .padding(all = 8.dp)
+                        .fillMaxWidth(),
+                    fontSize = 28.sp,
+                    textAlign = TextAlign.Center
+                )
+            }
+            item {
+                Column {
+                    Row(verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .background(MaterialTheme.colors.onSurface.copy(alpha = 0.1f))
+                            .fillMaxWidth()
+                            .clickable {
+                                selectedButton.value = radioOptions[0]
+                            }) {
+                        RadioButton(
+                            selected = selectedButton.value == radioOptions[0],
+                            modifier = Modifier.padding(all = 8.dp),
+                            onClick = {
+                                selectedButton.value = radioOptions[0]
+                            }
+                        )
+                        Text(
+                            text = radioOptions[0],
+                            modifier = Modifier.padding(all = 8.dp),
+                            fontSize = 32.sp
+                        )
+                    }
+                    Row(verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .background(MaterialTheme.colors.onSurface.copy(alpha = 0.1f))
+                            .fillMaxWidth()
+                            .clickable {
+                                selectedButton.value = radioOptions[1]
+                            }) {
+                        RadioButton(
+                            selected = selectedButton.value == radioOptions[1],
+                            modifier = Modifier.padding(all = 8.dp),
+                            onClick = {
+                                selectedButton.value = radioOptions[1]
+                            }
+                        )
+                        Text(
+                            text = radioOptions[1],
+                            modifier = Modifier.padding(all = 8.dp),
+                            fontSize = 32.sp
+                        )
+                    }
+                    when (selectedButton.value) {
+                        radioOptions[0] -> {
+                            Row(verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier
+                                    .fillMaxWidth()) {
+                                Text(
+                                    text = stringResource(R.string.choose_pick_up),
+                                    modifier = Modifier
+                                        .padding(all = 8.dp)
+                                        .fillMaxWidth(),
+                                    fontSize = 28.sp,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+                            Row(verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier.fillMaxWidth()) {
+                                Box(modifier = Modifier
+                                    .background(MaterialTheme.colors.onSurface.copy(alpha = 0.1f))
+                                    .fillMaxSize()
+                                    .padding(all = 8.dp)) {
+                                    Text(
+                                        deliveryOptions[selectedIndex],
+                                        fontSize = 32.sp,
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .clickable(onClick = { expanded = true })
+                                    )
+                                    DropdownMenu(
+                                        expanded = expanded,
+                                        onDismissRequest = {
+                                            expanded = false
+                                        },
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .background(MaterialTheme.colors.surface)
+                                    ) {
+                                        deliveryOptions.forEachIndexed { index, title ->
+                                            DropdownMenuItem(
+                                                onClick = {
+                                                    selectedIndex = index
+                                                    expanded = false
+                                                }) {
+                                                Text(text = title)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        radioOptions[1] -> {
+                            Row(verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier
+                                    .fillMaxWidth()) {
+                                Text(
+                                    text = stringResource(R.string.enter_address),
+                                    modifier = Modifier
+                                        .padding(all = 8.dp)
+                                        .fillMaxWidth(),
+                                    fontSize = 28.sp,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+                            Row(verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier.fillMaxWidth()) {
+                                TextField(
+                                    value = addressInfo,
+                                    modifier = Modifier
+                                        .padding(all = 8.dp)
+                                        .fillMaxWidth(),
+                                    onValueChange = {
+                                        addressInfo = it
+                                    },
+                                    label = { Text("Write here your address and other information:") }
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        Button(onClick = {
+            alertDialogNeeded = true
+            if (selectedButton.value == radioOptions[1] && addressInfo.isEmpty()) {
+                alertDialogTitle = "Error"
+                alertDialogMessage = "You selected home delivery, but did not provide an " +
+                        "address. Specify the address or select a pick-up method."
+            } else {
+                alertDialogTitle = "Success"
+                alertDialogMessage = "Thank you for your purchase! Our staff will contact " +
+                        "you regarding your order as soon as possible."
+            }
+        }, modifier = Modifier
+            .padding(all = 8.dp)
+            .fillMaxWidth()
+        ) {
+            Text(text = stringResource(R.string.complete_order),
+                modifier = Modifier
+                    .padding(all = 8.dp)
+                    .fillMaxWidth(),
+                fontSize = 24.sp,
+                textAlign = TextAlign.Center)
+        }
+        if (alertDialogNeeded) {
+            AlertDialog(
+                onDismissRequest = {
+                    alertDialogNeeded = false
+                    if (alertDialogTitle == "Success") {
+                        for (item in itemsWholeList) {
+                            item.basketAmount.value = "0"
+                        }
+                        basketState.value = BasketState.BASKET
+                        menuState.value = MenuPage.CATALOG
+                        isItemSelected.value = false
+                    }
+                },
+                title = {
+                    Text(alertDialogTitle)
+                },
+                confirmButton = {
+                    Button(
+                        onClick = {
+                            alertDialogNeeded = false
+                            if (alertDialogTitle == "Success") {
+                                for (item in itemsWholeList) {
+                                    item.basketAmount.value = "0"
+                                }
+                                basketState.value = BasketState.BASKET
+                                menuState.value = MenuPage.CATALOG
+                                isItemSelected.value = false
+                            }
+                        }
+                    ) {
+                        Text("OK")
+                    }
+                },
+                text = {
+                    Text(alertDialogMessage)
+                },
+            )
+        }
+    }
 }
 
 @Composable
@@ -410,7 +643,9 @@ fun DeliveryDetails(basketState: MutableState<BasketState>) {
 )
 fun DeliveryDetailsPreview() {
     val basketState = remember { mutableStateOf(BasketState.DELIVERY_DETAILS) }
+    val menuState = remember { mutableStateOf(MenuPage.BASKET) }
+    val isItemSelected = remember { mutableStateOf(false) }
     TechnoBearProjectTheme {
-        DeliveryDetails(basketState)
+        DeliveryDetails(basketState, menuState, isItemSelected)
     }
 }
