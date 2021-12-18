@@ -20,9 +20,9 @@ import app.technobearproject.ui.theme.TechnoBearProjectTheme
 fun ContactUs() {
     var mail by rememberSaveable { mutableStateOf("") }
     var feedback by rememberSaveable { mutableStateOf("") }
-    var alertDialogNeeded by remember { mutableStateOf(false) }
-    var alertDialogTitle by remember { mutableStateOf("Error") }
-    var alertDialogMessage by remember { mutableStateOf("Something get wrong...") }
+    var alertDialogNeeded by rememberSaveable { mutableStateOf(false) }
+    var alertDialogTitle by rememberSaveable { mutableStateOf("Error") }
+    var alertDialogMessage by rememberSaveable { mutableStateOf("Something get wrong...") }
     Column {
         Text(text = stringResource(R.string.contact_us),
             modifier = Modifier

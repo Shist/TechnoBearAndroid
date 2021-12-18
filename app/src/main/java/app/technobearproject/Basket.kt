@@ -115,7 +115,7 @@ fun Basket(basketState: MutableState<BasketState>) {
     name = "DarkBasketPreview"
 )
 fun BasketPreview() {
-    val basketState = remember { mutableStateOf(BasketState.BASKET) }
+    val basketState = rememberSaveable { mutableStateOf(BasketState.BASKET) }
     TechnoBearProjectTheme {
         Basket(basketState)
     }
@@ -213,8 +213,8 @@ fun BasketItemCard(item: ProductItem) {
 )
 @Composable
 fun BasketItemCardPreview() {
-    val itemAmount = remember { mutableStateOf("1") }
-    val currItem = remember { mutableStateOf(ProductItem("Name",
+    val itemAmount = rememberSaveable { mutableStateOf("1") }
+    val currItem = rememberSaveable { mutableStateOf(ProductItem("Name",
         "$100.00",
         R.drawable.qe43q60aauxru_samsung_607d5ce61da8f,
         "Description",
@@ -228,7 +228,7 @@ fun BasketItemCardPreview() {
 @Composable
 fun CheckoutOrder(basketState: MutableState<BasketState>) {
     var phoneNumber by rememberSaveable { mutableStateOf("") }
-    var alertDialogNeeded by remember { mutableStateOf(false) }
+    var alertDialogNeeded by rememberSaveable { mutableStateOf(false) }
     val basketList = itemsWholeList.filter { it.basketAmount.value.toInt() > 0 }
     var descriptionDetails = "Tap here to open order details\n"
     descriptionDetails += "====================\n"
@@ -291,7 +291,7 @@ fun CheckoutOrder(basketState: MutableState<BasketState>) {
             item {
                 Row (Modifier.padding(8.dp)) {
                     Row(modifier = Modifier.padding(all = 8.dp)) {
-                        var isExpanded by remember { mutableStateOf(false) }
+                        var isExpanded by rememberSaveable { mutableStateOf(false) }
                         val surfaceColor: Color by animateColorAsState(
                             if (isExpanded) MaterialTheme.colors.surface else
                                 MaterialTheme.colors.surface.copy(alpha = 0.1f),
@@ -390,7 +390,7 @@ fun CheckoutOrder(basketState: MutableState<BasketState>) {
     name = "DarkCheckoutOrderPreview"
 )
 fun CheckoutOrderPreview() {
-    val basketState = remember { mutableStateOf(BasketState.CHECKOUT_ORDER) }
+    val basketState = rememberSaveable { mutableStateOf(BasketState.CHECKOUT_ORDER) }
     TechnoBearProjectTheme {
         CheckoutOrder(basketState)
     }
@@ -402,14 +402,14 @@ fun DeliveryDetails(basketState: MutableState<BasketState>,
                     isItemSelected: MutableState<Boolean>) {
     val radioOptions = listOf(stringResource(id = R.string.pick_up_point),
         stringResource(id = R.string.home_delivery))
-    val selectedButton = remember { mutableStateOf(radioOptions[0]) }
-    var alertDialogNeeded by remember { mutableStateOf(false) }
-    var alertDialogTitle by remember { mutableStateOf("Error") }
-    var alertDialogMessage by remember { mutableStateOf("Something get wrong...") }
+    val selectedButton = rememberSaveable { mutableStateOf(radioOptions[0]) }
+    var alertDialogNeeded by rememberSaveable { mutableStateOf(false) }
+    var alertDialogTitle by rememberSaveable { mutableStateOf("Error") }
+    var alertDialogMessage by rememberSaveable { mutableStateOf("Something get wrong...") }
     val deliveryOptions = listOf("Dzerzhinskaga, 122", "Slobodskaya, 177", "Independence, 4")
-    var expanded by remember { mutableStateOf(false) }
-    var selectedIndex by remember { mutableStateOf(0) }
-    var addressInfo by remember { mutableStateOf("") }
+    var expanded by rememberSaveable { mutableStateOf(false) }
+    var selectedIndex by rememberSaveable { mutableStateOf(0) }
+    var addressInfo by rememberSaveable { mutableStateOf("") }
     Column {
         LazyColumn(modifier = Modifier.weight(1f)) {
             item {
@@ -642,9 +642,9 @@ fun DeliveryDetails(basketState: MutableState<BasketState>,
     name = "DarkDeliveryDetailsPreview"
 )
 fun DeliveryDetailsPreview() {
-    val basketState = remember { mutableStateOf(BasketState.DELIVERY_DETAILS) }
-    val menuState = remember { mutableStateOf(MenuPage.BASKET) }
-    val isItemSelected = remember { mutableStateOf(false) }
+    val basketState = rememberSaveable { mutableStateOf(BasketState.DELIVERY_DETAILS) }
+    val menuState = rememberSaveable { mutableStateOf(MenuPage.BASKET) }
+    val isItemSelected = rememberSaveable { mutableStateOf(false) }
     TechnoBearProjectTheme {
         DeliveryDetails(basketState, menuState, isItemSelected)
     }

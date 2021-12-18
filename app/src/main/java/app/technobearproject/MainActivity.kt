@@ -11,6 +11,8 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -46,10 +48,10 @@ class MainActivity : ComponentActivity() {
 fun MakeScaffold() {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
-    val menuPage = remember { mutableStateOf(MenuPage.START_PAGE) }
-    val isItemSelected = remember { mutableStateOf(false) }
-    val selectedItem = remember { mutableStateOf(ProductItem()) }
-    val basketState = remember { mutableStateOf(BasketState.BASKET) }
+    val menuPage = rememberSaveable { mutableStateOf(MenuPage.START_PAGE) }
+    val isItemSelected = rememberSaveable { mutableStateOf(false) }
+    val selectedItem = rememberSaveable { mutableStateOf(ProductItem()) }
+    val basketState = rememberSaveable { mutableStateOf(BasketState.BASKET) }
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
@@ -292,7 +294,7 @@ fun MenuContentPreview() {
     TechnoBearProjectTheme {
         val scaffoldState = rememberScaffoldState()
         val scope = rememberCoroutineScope()
-        val menuPage = remember { mutableStateOf(MenuPage.START_PAGE) }
+        val menuPage = rememberSaveable { mutableStateOf(MenuPage.START_PAGE) }
         MenuContent(scaffoldState, scope, menuPage)
     }
 }

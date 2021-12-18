@@ -1,7 +1,11 @@
 package app.technobearproject
 
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.SaverScope
 
 enum class ProductType {
     PHONE,
@@ -20,7 +24,40 @@ class ProductItem(val name: String = "",
                   val description: String = "",
                   val type: ProductType = ProductType.NONE,
                   var selectedAmount: MutableState<String> = mutableStateOf("0"),
-                  var basketAmount: MutableState<String> = mutableStateOf("0"))
+                  var basketAmount: MutableState<String> = mutableStateOf("0")) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readInt(),
+        parcel.readString()!!,
+        ProductType.valueOf(parcel.readString()!!),
+        mutableStateOf(parcel.readString()!!),
+        mutableStateOf(parcel.readString()!!)
+    ) {
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(name)
+        parcel.writeString(price)
+        parcel.writeInt(image)
+        parcel.writeString(description)
+        parcel.writeString(this.type.name)
+        parcel.writeString(this.selectedAmount.value)
+        parcel.writeString(this.basketAmount.value)
+    }
+
+    override fun describeContents() = 0
+
+    companion object CREATOR : Parcelable.Creator<ProductItem> {
+        override fun createFromParcel(parcel: Parcel): ProductItem {
+            return ProductItem(parcel)
+        }
+
+        override fun newArray(size: Int): Array<ProductItem?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
 
 val itemsWholeList = listOf(
     ProductItem("DualSense Wireless Controller ",

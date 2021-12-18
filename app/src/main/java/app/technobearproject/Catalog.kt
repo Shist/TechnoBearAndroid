@@ -84,8 +84,8 @@ fun Catalog(isItemSelected: MutableState<Boolean>,
     name = "DarkCatalogPreview"
 )
 fun CatalogPreview() {
-    val isItemSelected = remember { mutableStateOf(false) }
-    val selectedItem = remember { mutableStateOf(ProductItem()) }
+    val isItemSelected = rememberSaveable { mutableStateOf(false) }
+    val selectedItem = rememberSaveable { mutableStateOf(ProductItem()) }
     TechnoBearProjectTheme {
         Catalog(isItemSelected, selectedItem)
     }
@@ -130,9 +130,9 @@ fun ItemCard(item: ProductItem,
 )
 @Composable
 fun ItemCardPreview() {
-    val isItemSelected = remember { mutableStateOf(false) }
-    val selectedItem = remember { mutableStateOf(ProductItem()) }
-    val itemAmount = remember { mutableStateOf("0") }
+    val isItemSelected = rememberSaveable { mutableStateOf(false) }
+    val selectedItem = rememberSaveable { mutableStateOf(ProductItem()) }
+    val itemAmount = rememberSaveable { mutableStateOf("0") }
     TechnoBearProjectTheme {
         ItemCard(item = ProductItem("Name",
             "$100.00",
@@ -151,7 +151,7 @@ fun ItemDetails(isItemSelected: MutableState<Boolean>,
     val oneItemPrice = selectedItem.value.price.substring(1).toFloat()
     val itemsAmount = selectedItem.value.selectedAmount.value.toInt()
     val wholeItemsPrice = "\$${(oneItemPrice * itemsAmount)}"
-    var alertDialogNeeded by remember { mutableStateOf(false) }
+    var alertDialogNeeded by rememberSaveable { mutableStateOf(false) }
     LazyColumn {
         item {
             Row(modifier = Modifier.clickable {
@@ -316,9 +316,9 @@ fun ItemDetails(isItemSelected: MutableState<Boolean>,
 )
 @Composable
 fun ItemDetailsPreview() {
-    val isItemSelected = remember { mutableStateOf(false) }
-    val itemAmount = remember { mutableStateOf("0") }
-    val selectedItem = remember { mutableStateOf(ProductItem("Name",
+    val isItemSelected = rememberSaveable { mutableStateOf(false) }
+    val itemAmount = rememberSaveable { mutableStateOf("0") }
+    val selectedItem = rememberSaveable { mutableStateOf(ProductItem("Name",
         "$100.00",
         R.drawable.qe43q60aauxru_samsung_607d5ce61da8f,
         "Description",
