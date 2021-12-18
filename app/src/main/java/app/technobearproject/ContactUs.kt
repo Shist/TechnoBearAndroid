@@ -45,12 +45,12 @@ fun ContactUs() {
             value = feedback,
             modifier = Modifier
                 .padding(all = 8.dp)
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .weight(1f),
             onValueChange = {
                 feedback = it
             },
-            label = { Text("Write here your question or feedback:") },
-            maxLines = 16
+            label = { Text("Write here your question or feedback:") }
         )
         Button(onClick = {
             alertDialogNeeded = true
