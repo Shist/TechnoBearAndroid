@@ -94,7 +94,7 @@ fun ContactUs() {
                         alertDialogNeeded = false
                     }
                 ) {
-                    Text("Confirm")
+                    Text("OK")
                 }
             },
             text = {

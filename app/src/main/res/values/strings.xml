@@ -14,7 +14,14 @@
     <string name="back_to_catalog">Back to catalog</string>
     <string name="amount">Amount</string>
     <string name="price">Price</string>
+    <string name="total_price">Total Price: </string>
     <string name="add_to_basket">Add to basket</string>
     <string name="description">Description</string>
     <string name="basket_is_empty">Your basket is empty. Add some goods to it!</string>
+    <string name="checkout_order">Checkout Order</string>
+    <string name="back_to_basket">Back to basket</string>
+    <string name="order_details">Orders details</string>
+    <string name="empty_phone_number">You entered empty phone number. Please, enter some…</string>
+    <string name="delivery_details">Delivery Details</string>
+    <string name="back_to_checkout_order">Back to checkout order</string>
 </resources>

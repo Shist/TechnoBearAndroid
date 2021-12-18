@@ -143,9 +143,7 @@ fun QuestionCard(question: String, answer: String) {
                 Surface(
                     shape = MaterialTheme.shapes.medium,
                     elevation = 1.dp,
-                    // surfaceColor color will be changing gradually from primary to surface
                     color = surfaceColor,
-                    // animateContentSize will change the Surface size gradually
                     modifier = Modifier
                         .animateContentSize()
                         .padding(1.dp)
@@ -153,8 +151,6 @@ fun QuestionCard(question: String, answer: String) {
                     Text(
                         text = answer,
                         modifier = Modifier.padding(all = 4.dp),
-                        // If the message is expanded, we display all its content
-                        // otherwise we only display the first line
                         maxLines = if (isExpanded) Int.MAX_VALUE else 1,
                         style = MaterialTheme.typography.body2
                     )
@@ -162,7 +158,6 @@ fun QuestionCard(question: String, answer: String) {
             }
         }
     }
-
 }
 
 @Preview(name = "LightQuestionCardPreview")

@@ -170,7 +170,7 @@ fun ItemDetails(isItemSelected: MutableState<Boolean>,
         }
         item {
             Row {
-                Column(modifier = Modifier.fillMaxWidth(0.5f)) {
+                Column(modifier = Modifier.fillMaxWidth(0.4f)) {
                     Text(
                         text = selectedItem.value.name,
                         modifier = Modifier
@@ -294,7 +294,7 @@ fun ItemDetails(isItemSelected: MutableState<Boolean>,
                         alertDialogNeeded = false
                     }
                 ) {
-                    Text("Confirm")
+                    Text("OK")
                 }
             },
             text = {
