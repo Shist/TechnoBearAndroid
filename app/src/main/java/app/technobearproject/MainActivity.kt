@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -13,7 +14,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -140,129 +140,143 @@ fun MakeScaffoldPreview() {
 fun MenuContent(scaffoldState: ScaffoldState,
                 scope: CoroutineScope,
                 menuPage: MutableState<MenuPage>) {
-    Column(modifier = Modifier
+    LazyColumn(modifier = Modifier
         .padding(all = 8.dp)
         .fillMaxSize(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start) {
-        Row(modifier = Modifier.padding(all = 8.dp)) {
-            Text(text = stringResource(id = R.string.menu_name),
-                fontSize = 48.sp,
-                modifier = Modifier.padding(all = 8.dp))
+        item {
+            Row(modifier = Modifier.padding(all = 8.dp)) {
+                Text(text = stringResource(id = R.string.menu_name),
+                    fontSize = 48.sp,
+                    modifier = Modifier.padding(all = 8.dp))
+            }
         }
-        Row(verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .padding(all = 8.dp)
-                .fillMaxWidth()
-                .clickable {
-                    menuPage.value = MenuPage.ACCOUNT
-                    scope.launch {
-                        scaffoldState.drawerState.close()
-                    }
-                } ) {
-            Icon(imageVector = Icons.Default.AccountBox,
-                contentDescription = stringResource(id = R.string.account),
+        item {
+            Row(verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .padding(all = 8.dp)
-                    .defaultMinSize(48.dp, 48.dp))
-            Text(text = stringResource(id = R.string.account),
-                fontSize = 24.sp,
-                modifier = Modifier.padding(all = 8.dp))
+                    .fillMaxWidth()
+                    .clickable {
+                        menuPage.value = MenuPage.ACCOUNT
+                        scope.launch {
+                            scaffoldState.drawerState.close()
+                        }
+                    } ) {
+                Icon(imageVector = Icons.Default.AccountBox,
+                    contentDescription = stringResource(id = R.string.account),
+                    modifier = Modifier
+                        .padding(all = 8.dp)
+                        .defaultMinSize(48.dp, 48.dp))
+                Text(text = stringResource(id = R.string.account),
+                    fontSize = 24.sp,
+                    modifier = Modifier.padding(all = 8.dp))
+            }
         }
-        Row(verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .padding(all = 8.dp)
-                .fillMaxWidth()
-                .clickable {
-                    menuPage.value = MenuPage.CATALOG
-                    scope.launch {
-                        scaffoldState.drawerState.close()
-                    }
-                } ) {
-            Icon(imageVector = Icons.Default.Search,
-                contentDescription = stringResource(id = R.string.catalog),
+        item {
+            Row(verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .padding(all = 8.dp)
-                    .defaultMinSize(48.dp, 48.dp))
-            Text(text = stringResource(id = R.string.catalog),
-                fontSize = 24.sp,
-                modifier = Modifier.padding(all = 8.dp))
+                    .fillMaxWidth()
+                    .clickable {
+                        menuPage.value = MenuPage.CATALOG
+                        scope.launch {
+                            scaffoldState.drawerState.close()
+                        }
+                    } ) {
+                Icon(imageVector = Icons.Default.Search,
+                    contentDescription = stringResource(id = R.string.catalog),
+                    modifier = Modifier
+                        .padding(all = 8.dp)
+                        .defaultMinSize(48.dp, 48.dp))
+                Text(text = stringResource(id = R.string.catalog),
+                    fontSize = 24.sp,
+                    modifier = Modifier.padding(all = 8.dp))
+            }
         }
-        Row(verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .padding(all = 8.dp)
-                .fillMaxWidth()
-                .clickable {
-                    menuPage.value = MenuPage.BASKET
-                    scope.launch {
-                        scaffoldState.drawerState.close()
-                    }
-                } ) {
-            Icon(imageVector = Icons.Default.ShoppingCart,
-                contentDescription = stringResource(id = R.string.basket),
+        item {
+            Row(verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .padding(all = 8.dp)
-                    .defaultMinSize(48.dp, 48.dp))
-            Text(text = stringResource(id = R.string.basket),
-                fontSize = 24.sp,
-                modifier = Modifier.padding(all = 8.dp))
+                    .fillMaxWidth()
+                    .clickable {
+                        menuPage.value = MenuPage.BASKET
+                        scope.launch {
+                            scaffoldState.drawerState.close()
+                        }
+                    } ) {
+                Icon(imageVector = Icons.Default.ShoppingCart,
+                    contentDescription = stringResource(id = R.string.basket),
+                    modifier = Modifier
+                        .padding(all = 8.dp)
+                        .defaultMinSize(48.dp, 48.dp))
+                Text(text = stringResource(id = R.string.basket),
+                    fontSize = 24.sp,
+                    modifier = Modifier.padding(all = 8.dp))
+            }
         }
-        Row(verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .padding(all = 8.dp)
-                .fillMaxWidth()
-                .clickable {
-                    menuPage.value = MenuPage.ABOUT_COMPANY
-                    scope.launch {
-                        scaffoldState.drawerState.close()
-                    }
-                } ) {
-            Icon(imageVector = Icons.Default.Info,
-                contentDescription = stringResource(id = R.string.about_company),
+        item {
+            Row(verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .padding(all = 8.dp)
-                    .defaultMinSize(48.dp, 48.dp))
-            Text(text = stringResource(id = R.string.about_company),
-                fontSize = 24.sp,
-                modifier = Modifier.padding(all = 8.dp))
+                    .fillMaxWidth()
+                    .clickable {
+                        menuPage.value = MenuPage.ABOUT_COMPANY
+                        scope.launch {
+                            scaffoldState.drawerState.close()
+                        }
+                    } ) {
+                Icon(imageVector = Icons.Default.Info,
+                    contentDescription = stringResource(id = R.string.about_company),
+                    modifier = Modifier
+                        .padding(all = 8.dp)
+                        .defaultMinSize(48.dp, 48.dp))
+                Text(text = stringResource(id = R.string.about_company),
+                    fontSize = 24.sp,
+                    modifier = Modifier.padding(all = 8.dp))
+            }
         }
-        Row(verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .padding(all = 8.dp)
-                .fillMaxWidth()
-                .clickable {
-                    menuPage.value = MenuPage.FAQ
-                    scope.launch {
-                        scaffoldState.drawerState.close()
-                    }
-                } ) {
-            Icon(imageVector = Icons.Default.List,
-                contentDescription = stringResource(id = R.string.faq),
+        item {
+            Row(verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .padding(all = 8.dp)
-                    .defaultMinSize(48.dp, 48.dp))
-            Text(text = stringResource(id = R.string.faq),
-                fontSize = 24.sp,
-                modifier = Modifier.padding(all = 8.dp))
+                    .fillMaxWidth()
+                    .clickable {
+                        menuPage.value = MenuPage.FAQ
+                        scope.launch {
+                            scaffoldState.drawerState.close()
+                        }
+                    } ) {
+                Icon(imageVector = Icons.Default.List,
+                    contentDescription = stringResource(id = R.string.faq),
+                    modifier = Modifier
+                        .padding(all = 8.dp)
+                        .defaultMinSize(48.dp, 48.dp))
+                Text(text = stringResource(id = R.string.faq),
+                    fontSize = 24.sp,
+                    modifier = Modifier.padding(all = 8.dp))
+            }
         }
-        Row(verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .padding(all = 8.dp)
-                .fillMaxWidth()
-                .clickable {
-                    menuPage.value = MenuPage.CONTACT_US
-                    scope.launch {
-                        scaffoldState.drawerState.close()
-                    }
-                } ) {
-            Icon(imageVector = Icons.Default.Email,
-                contentDescription = stringResource(id = R.string.contact_us),
+        item {
+            Row(verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .padding(all = 8.dp)
-                    .defaultMinSize(48.dp, 48.dp))
-            Text(text = stringResource(id = R.string.contact_us),
-                fontSize = 24.sp,
-                modifier = Modifier.padding(all = 8.dp))
+                    .fillMaxWidth()
+                    .clickable {
+                        menuPage.value = MenuPage.CONTACT_US
+                        scope.launch {
+                            scaffoldState.drawerState.close()
+                        }
+                    } ) {
+                Icon(imageVector = Icons.Default.Email,
+                    contentDescription = stringResource(id = R.string.contact_us),
+                    modifier = Modifier
+                        .padding(all = 8.dp)
+                        .defaultMinSize(48.dp, 48.dp))
+                Text(text = stringResource(id = R.string.contact_us),
+                    fontSize = 24.sp,
+                    modifier = Modifier.padding(all = 8.dp))
+            }
         }
     }
 }
