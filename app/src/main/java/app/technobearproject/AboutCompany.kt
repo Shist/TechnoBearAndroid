@@ -1,8 +1,8 @@
 package app.technobearproject
 
 import android.content.res.Configuration
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -24,15 +24,19 @@ const val ABOUT_COMPANY = "TechnoBear is a team of four developers, each of whom
 
 @Composable
 fun AboutCompany() {
-    Column {
-        Text(text = stringResource(R.string.about_TechnoBear),
-            modifier = Modifier.padding(all = 8.dp),
-            fontSize = 48.sp,
-            textAlign = TextAlign.Center)
-        Text(text = ABOUT_COMPANY,
-            modifier = Modifier.padding(all = 8.dp),
-            fontSize = 24.sp,
-            textAlign = TextAlign.Start)
+    LazyColumn {
+        item {
+            Text(text = stringResource(R.string.about_TechnoBear),
+                modifier = Modifier.padding(all = 8.dp),
+                fontSize = 48.sp,
+                textAlign = TextAlign.Center)
+        }
+        item {
+            Text(text = ABOUT_COMPANY,
+                modifier = Modifier.padding(all = 8.dp),
+                fontSize = 24.sp,
+                textAlign = TextAlign.Start)
+        }
     }
 }
 
