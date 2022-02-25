@@ -1,15 +1,19 @@
 # TechnoBearAndroid
 Repository with android application for online shop Techno Bear.
 
-How this works on real device:
+## How this works on real device:
+
 ![Here could be image, but your Internet is too slow...](https://github.com/Shist/TechnoBearAndroid/blob/master/app/src/main/res/drawable/App_Demonstration.jpg)
 
-TechnoBear is a team of four developers, each of whom actively contributes to the development and promotion of the project. In this application, you have the opportunity to make a purchase of various digital equipment using the interface that we have developed for you. Our team:
+### TechnoBear is a team of four developers, each of whom actively contributes to the development and promotion of the project. In this application, you have the opportunity to make a purchase of various digital equipment using the interface that we have developed for you. Our team:
 
-Alexey Kokhovets - head of the project
-Andrey Grishkin - web component developer
-Pavel Zhukovsky - mobile application developer
-Fedor Miron - project tester and responsible for the API
+### Alexey Kokhovets - head of the project
+
+### Andrey Grishkin - web component developer
+
+### Pavel Zhukovsky - mobile application developer
+
+### Fedor Miron - project tester and responsible for the API
 
 # Site scheme:
 
