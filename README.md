@@ -8,6 +8,10 @@
 ![Here could be image, but your Internet is too slow...](https://github.com/Shist/TechnoBearAndroid/blob/master/app/src/main/res/drawable/image_demo_real.png)
 ## Video demo
 
+
+https://user-images.githubusercontent.com/40572268/192575470-9bf2af41-ca31-4167-93d4-954ea49dbe48.mp4
+
+
 ---
 ## Technologies used in the project
 - Kotlin
