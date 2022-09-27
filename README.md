@@ -3,9 +3,9 @@
 ---
 # Demonstration of the application
 ## Image demo
-![Here could be image, but your Internet is too slow...]()
+![Here could be image, but your Internet is too slow...](https://github.com/Shist/TechnoBearAndroid/blob/master/app/src/main/res/drawable/image_demo.png)
 ## How this works on real device:
-![Here could be image, but your Internet is too slow...](https://github.com/Shist/TechnoBearAndroid/blob/master/app/src/main/res/drawable/App_Demonstration.jpg)
+![Here could be image, but your Internet is too slow...](https://github.com/Shist/TechnoBearAndroid/blob/master/app/src/main/res/drawable/image_demo_real.png)
 ## Video demo
 
 ---
