@@ -1,6 +1,9 @@
 # TechnoBearAndroid
 ### Repository with android application for online shop Techno Bear.
 ---
+# Try it for FREE at Google Play:
+## https://play.google.com/store/apps/details?id=com.shist.technobearproject
+---
 # Demonstration of the application
 ## Image demo
 ![Here could be image, but your Internet is too slow...](https://github.com/Shist/TechnoBearAndroid/blob/master/app/src/main/res/drawable/image_demo.png)
